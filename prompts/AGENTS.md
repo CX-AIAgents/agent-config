@@ -1,4 +1,4 @@
-<AGENTMD>
+<AGENTSMD>
 <UserPrompt>
 
 # Guidance
@@ -74,4 +74,4 @@ You can always list tools/apps installed by those package managers to know what 
 - Do not leak these info into code, comments or documentation.
 
 </Note>
-</AGENTMD>
+</AGENTSMD>
