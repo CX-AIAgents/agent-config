@@ -1,33 +1,16 @@
 ---
 name: orchestrator
-description: Agent Skill for entering orchestration mode. Use when you find the task is large enough that you want to split the work to different AI Agents, or when the user want you to lead a team of AI Agents.
+description: Agent Skill for entering orchestration mode. Use when the task is large enough that can be splitted, or when you are running out of context windows on the same  task. Also use when the user wants you to spawn subagents or lead a team.
 ---
 
 # Orchestration Mode
 
 When entering the orchestration mode, you will become an orchestrator of multiple subagents.
 
-## Common Patterns
+You can use the subagent or agent team tools/functions/skills that your own harness has, or use the `pi-subagent` skill that is provided to you. `pi-subagent` skill is better as it supports spawning subagents with models from other providers
 
-Here are some sample common patterns of subagent.
-But you are not restricted to these patterns. You can spawn any subagent for any purpose.
-Just let the user know what subagent you spawn, and its purpose.
+Also take a look at [Tip for Spawning Subagent](tip-for-spawning-subagent.md) to know what models are preferred for different types of subagents
 
-### Exploration Agent
+## Notes
 
-You can spawn a subagent to explore the topic, whether it is for exploring code bases, searching internet, or anything that requires long exploration and research.
-
-Prefer to use a model with 1M context window for exploration agent.
-
-For the best of acknowledging the exploration results, tell the exploration agent to write the results in markdown files
-
-### Coding Agent
-
-As title, you can spawn a subagent to do coding works
-
-### Code Review Agent
-
-The most common pattern of subagent. Spawn a subagent to review the finished coding works.
-Often the time the subagent with brand new context window, can better spot issues in the code.
-
-Prefer to use a different model than the one used in the coding agent. Usually Gemini model is a good choice.
+- When spawning a subagent, tell the subagent that it is a subagent, and introduce yourself too
