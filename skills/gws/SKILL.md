@@ -9,18 +9,42 @@ description: Agent Skill for Google Workspace CLI. Use when interacting with use
 
 The `gws` binary must be on `$PATH`.
 
-### Authentication
+### Multi-accounts management & Authentication
 
-Check authentication status:
+Credentials are isolated per account alias under `~/.config/gws/<alias>/`, with `~/.config/gws/accounts.json` serving as the account registry:
 
-```bash
-gws auth status
+```json
+{
+  "main": {
+    "description": "Main Google account"
+  }
+}
 ```
 
-Do not paste the full auth status output into chat due to security concerns.
-If the user is not logged in, tell the user to run `gws auth login` to log in.
+Before running any authenticated `gws` command:
 
-Beside, Service-account authentication is also supported when the user intentionally chooses it:
+1. Read `~/.config/gws/accounts.json` to discover available account aliases and their descriptions.
+2. If only one account is registered, or the user's intent clearly matches one account, use that `<alias>`. If multiple accounts exist and the target account is ambiguous, ask the user which account to use.
+3. Pass `GOOGLE_WORKSPACE_CLI_CONFIG_DIR="$HOME/.config/gws/<alias>"` on every authenticated `gws` command.
+
+### Check authentication status (also useful for inspecting the `user` email of an alias):
+
+```bash
+GOOGLE_WORKSPACE_CLI_CONFIG_DIR="$HOME/.config/gws/<alias>" gws auth status
+```
+
+Do not paste the full auth status output into chat due to security concerns. (E.g. pipe it with `jq`, or redirect the output to a file, etc.)
+
+### To log in or add a new account `<alias>`:
+
+1. Create `~/.config/gws/<alias>` (`chmod 700`), copy `~/.config/gws/client_secret.json` into `~/.config/gws/<alias>/client_secret.json`, and add `<alias>` to `~/.config/gws/accounts.json`.
+2. Tell the user to run:
+
+```bash
+GOOGLE_WORKSPACE_CLI_CONFIG_DIR="$HOME/.config/gws/<alias>" gws auth login
+```
+
+Besides OAuth2, Service-account authentication is also supported when the user intentionally chooses it:
 
 ```bash
 export GOOGLE_APPLICATION_CREDENTIALS=/path/to/key.json
@@ -44,7 +68,7 @@ gws schema <service.resource.method>
 gws schema <service.resource.method> --resolve-refs
 ```
 
-Use `gws --help` to see the current list of supported services. Examples may include Gmail, Calendar, Drive, Sheets, Docs, Slides, Tasks, Keep, etc. 
+Use `gws --help` to see the current list of supported services. Examples may include Gmail, Calendar, Drive, Sheets, Docs, Slides, Tasks, Keep, etc.
 
 ## CLI Syntax
 
