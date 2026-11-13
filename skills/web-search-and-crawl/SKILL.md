@@ -15,16 +15,16 @@ This is a combination of 3 skills:
 When to use which:
 
 - `exa` for:
-    - Default choice for web search
-    - Can also do web crawl 
+  - Default choice for web search
+  - Can also do web crawl
 - `jina` for:
-    - Default choice for web crawl
-    - Can also do web search
+  - Default choice for web crawl
+  - Can also do web search
 - `bocha` for:
-    - For searching contents likely from Chinese Internet (xiaohongshu, bilibili, weibo, etc.)
+  - For searching contents likely from Chinese Internet (xiaohongshu, bilibili, weibo, etc.)
 - `deepseek-search-and-crawl` for:
-    - Another search and crawl option for Chinese Internet
-    - If `bocha` failed to find, try this one. Likewise, if `deepseek-search-and-crawl` failed to find, try `bocha`.
-    - Is also the only crawl option for Chinese Internet.
+  - Another search and crawl option for Chinese Internet
+  - If `bocha` failed to find, try this one. Likewise, if `deepseek-search-and-crawl` failed to find, try `bocha`.
+  - Is also the only crawl option for Chinese Internet.
 
-Otherwise, consider `use-browser` skill
+Otherwise, consider `treg` or `use-browser` skill.
