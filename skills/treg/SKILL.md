@@ -27,9 +27,9 @@ Unified pay-as-you-go access to 4,100+ external APIs and generative models (`htt
    TREG_TELEMETRY=0 treg balance --json | jq '{balance_usd, in_flight_micro}'
    ```
 
-## Usage (Discover -> Inspect -> Call)
+## Usage
 
-### CLI (Preferred)
+### CLI
 
 Run `TREG_TELEMETRY=0 treg <command> --help` for full flags.
 
@@ -54,12 +54,12 @@ Use `openapi-inspection` on `https://treg.to/openapi.json`, or call directly wit
 
 ### Cost & Safety Rules
 
-- Spending threshold ($0.05 USD):
+- Spending threshold:
   - Single, read-only calls with estimated cost <= $0.05 USD may run automatically (pass `X-Treg-Route-Max-Cost: 0.05` when supported).
   - Quote the estimated price and confirm with the user before:
     1. Any single call estimated > $0.05 USD
     2. Any generative media task (`video-gen`, `image-gen`, `voice-gen`, `music-gen`)
-    3. Any batch/loop over multiple inputs (state expected total cost)
+    3. Any batch/loop over multiple inputs that the expected total cost > $0.05 USD (state expected total cost)
     4. Any non-read-only operation (posting, mutating external resources, or changing team settings)
 - Always report the settled cost after metered calls (`treg` stderr or `X-Treg-Cost-Micro`, where 1,000,000 micro-USD = $1.00).
 - Never retry a provider `4xx` (except `429`) on another provider; on timeouts, retry with the same `Idempotency-Key`.
